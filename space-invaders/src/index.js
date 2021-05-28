@@ -1,27 +1,32 @@
 // import init from "./scripts/init/init";
 
 import kaboom from "kaboom";
+const k = kaboom();
 
-import wallSprite from "./sprites/wall.json";
+import spaceInvaderPNG from "./assets/space-invader.png";
 
-function init() {
-    // initialize kaboom context
-    const k = kaboom();
+k.loadSprite("space-invader", spaceInvaderPNG);
 
-    // define a scene
-    k.scene("main", () => {
+// function init() {
+// initialize kaboom context
 
-        // add a text at position (100, 100)
-        k.add([
-            k.text("ohhimark", 32),
-            k.pos(100, 100),
-            k.sprite(wallSprite)
-        ]);
+// define a scene
+k.scene("main", () => {
 
-    });
+    // add a text at position (100, 100)
+    k.add([
+        k.text("ohhimark", 32),
+        k.pos(100, 100),
+    ]);
 
-    // start the game
-    k.start("main");
-}
+    k.add([
+        k.sprite("space-invader")
+    ]);
 
-init();
+});
+
+// start the game
+k.start("main");
+// }
+
+// init();

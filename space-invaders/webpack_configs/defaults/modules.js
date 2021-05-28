@@ -21,12 +21,20 @@ const TS_module = {
     exclude: /node_modules/,
 };
 
+
+// * Images
+const image_module = {
+    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+    type: 'asset/resource',
+};
+
 // * module config
 const modules_config = {
     rules: [
         HTML_module,
         JS_module,
         TS_module,
+        image_module,
     ],
 };
 
