@@ -1,3 +1,5 @@
-import kaboom from "kaboom";
-const k = kaboom();
+const loadAsset = (engine, assetName, assetPath) => {
+    engine.loadSprite(assetName, assetPath);
+};
 
+export default loadAsset;
