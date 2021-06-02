@@ -192,7 +192,6 @@ createScene(engine, SCENE_END, (args) => {
         engine.scale(10),
         engine.pos(engine.width() / 2, engine.height() / 2)
     ]);
-
 });
 
 // start the game

@@ -1,12 +1,14 @@
 import { assetNames } from "./assets/assets";
 
-const move_speed = 200;
+const move_speed = 120;
+const jump_force = 300;
 
 const playerConfig = {
     H_MOVE_SPEED: move_speed,
-    V_MOVE_SPEED: move_speed,
-    INITIAL_POSITION: (engine) => [engine.width() / 2, engine.height() / 2],
-    SPRITE: assetNames.SPACE_SHIP
+    JUMP_FORCE: jump_force,
+    BIG_JUMP_FORCE: jump_force * 1.5,
+    INITIAL_POSITION: (engine) => [30, 30],
+    SPRITE: assetNames.MARIO_STANDING
 }
 
 export default playerConfig;

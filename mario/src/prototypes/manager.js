@@ -7,6 +7,7 @@ ManagerPrototype.prototype.initialise = function initialise() {
     this.isInitialised = true;
 }
 
+// eslint-disable-next-line no-unused-vars
 ManagerPrototype.prototype.update = function update(tDelta) {
     // ....
 }

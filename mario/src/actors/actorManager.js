@@ -21,7 +21,7 @@ const ActorManager = function ActorManager(data) {
     }
 
     this.createActor = (actorCfg) => {
-
+        console.log(actorCfg);
         if (this.getActor(actorCfg[actorOptions.ACTOR_NAME])) {
             console.warn("[" + actorCfg[actorOptions.ACTOR_NAME] + "] Actor already exists");
             return null;
@@ -81,6 +81,9 @@ const ActorManager = function ActorManager(data) {
                     case actorOptions.ON_LAYER:
                         setup.push(this._engine.layer(actorCfg[key]));
                         break;
+                    case actorOptions.HAS_ORIGIN:
+                        setup.push(this._engine.origin(actorCfg[key]));
+                        break;
                     default:
                         break;
                 }
@@ -88,20 +91,28 @@ const ActorManager = function ActorManager(data) {
         }
 
         // * setup extra data
-        const extra_data = {
+        const data = {
             actorName: actorCfg[actorOptions.ACTOR_NAME],
         };
 
         if (actorCfg[actorOptions.HAS_DATA]) {
-            let data = actorCfg[actorOptions.HAS_DATA];
-            for (const d in data) {
-                if (Object.hasOwnProperty.call(data, d)) {
-                    extra_data[d] = data[d];
+            let d = actorCfg[actorOptions.HAS_DATA];
+            for (const _d in d) {
+                if (Object.hasOwnProperty.call(d, _d)) {
+                    data[_d] = d[_d];
                 }
             }
         }
 
-        setup.push(extra_data);
+        setup.push(data);
+
+        // * extras
+        if (actorCfg[actorOptions.HAS_EXTRA]) {
+            actorCfg[actorOptions.HAS_EXTRA].forEach((item) => {
+                setup.push(item);
+            });
+        }
+
 
         const actor = this._engine.add(setup);
 
@@ -127,7 +138,6 @@ const ActorManager = function ActorManager(data) {
 
         this.destroyActorByObject(actor);
     }
-
 
     this.destroyActorByObject = (actorObj) => {
         // * remove actor from array      
@@ -158,9 +168,9 @@ const ActorManager = function ActorManager(data) {
         this._engine.action(tag, handler);
     }
 
-    this.createOverlap = (actor_1, actor_2, handler) => {
-        // 
-    }
+    // this.createOverlap = (actor_1, actor_2, handler) => {
+    //     // 
+    // }
 
     this.createTagOverlap = (actor_obj, tag, handler) => {
         actor_obj.overlaps(tag, handler);
@@ -168,6 +178,13 @@ const ActorManager = function ActorManager(data) {
 
     this.createTaggedCollision = (tag_1, tag_2, handler) => {
         this._engine.collides(tag_1, tag_2, handler);
+    }
+
+    this.destroyAll = () => {
+        for (let i = this._actorList.length; i > this._actorList; i--) {
+            this._engine.destroy(this._actorList[i].actor);
+        }
+        this._actorList = [];
     }
 }
 
