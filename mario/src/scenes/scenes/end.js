@@ -16,7 +16,7 @@ const scene = (args, engine, SceneMgr) => {
 
     InputMgr.createKeyPress("space", () => {
         // * spawn a bullet
-        SceneMgr.goToScene(SCENE_LIST.SCENE_MAIN);
+        SceneMgr.goToScene(SCENE_LIST.LEVEL_1);
     });
 }
 

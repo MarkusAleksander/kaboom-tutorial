@@ -18,7 +18,7 @@ const scene = (args, engine, SceneMgr) => {
     SceneMgr.addLayer([['obj', 'ui'], 'obj']);
 
     // * level
-    const GAME_LEVEL = SceneMgr.addLevel(MapMgr.createMap(SCENE_LIST.SCENE_MAIN));
+    const GAME_LEVEL = SceneMgr.addLevel(MapMgr.createMap(SCENE_LIST.LEVEL_1));
 
     // * make mario big when eating a mushroom
     function makeBig() {
@@ -72,6 +72,22 @@ const scene = (args, engine, SceneMgr) => {
         if (isJumping) {
             engine.destroy(d);
         } else {
+            SceneMgr.goToScene(SCENE_LIST.SCENE_END, { score: SCORE_ACTOR.value });
+        }
+    });
+
+
+    PLAYER_ACTOR.collides('pipe', () => {
+        engine.keyPress('down', () => {
+            SceneMgr.goToScene(SCENE_LIST.LEVEL_2, { score: SCORE_ACTOR.value });
+        });
+    });
+
+    const FALL_DEATH = worldConfig.y_size * 20;
+
+    PLAYER_ACTOR.action(() => {
+        engine.camPos(PLAYER_ACTOR.pos);
+        if (PLAYER_ACTOR.pos.y >= FALL_DEATH) {
             SceneMgr.goToScene(SCENE_LIST.SCENE_END, { score: SCORE_ACTOR.value });
         }
     });
@@ -137,32 +153,22 @@ const scene = (args, engine, SceneMgr) => {
 
     // * collisions
 
-
-    // PLAYER_ACTOR.collides('coin', (c) => {
-    //     SCORE_ACTOR.value++;
-    //     SCORE_ACTOR.text = SCORE_ACTOR.value;
-    //     engine.destroy(c);
-    // });
-
-    // const incrementScore = () => {
-    // }
-
     // // * setup timer and score
     const SCORE_ACTOR = ActorMgr.createActor({
         [actorOptions.ACTOR_NAME]: "SCORE",
-        [actorOptions.HAS_TEXT]: '0',
+        [actorOptions.HAS_TEXT]: (args && args.score) ? args.score : 0,
         [actorOptions.HAS_POSITION]: [worldConfig.x_size, worldConfig.y_size],
         [actorOptions.HAS_ORIGIN]: actorOptions.ORIGIN_TOP_LEFT,
         [actorOptions.ON_LAYER]: 'ui',
         [actorOptions.HAS_SCALE]: 3,
         [actorOptions.HAS_DATA]: {
-            value: 0
+            value: (args && args.score) ? args.score : 0
         }
     });
 
     const LEVEL_TITLE = ActorMgr.createActor({
         [actorOptions.ACTOR_NAME]: "LevelTitle",
-        [actorOptions.HAS_TEXT]: 'Level 0',
+        [actorOptions.HAS_TEXT]: 'Level 1',
         [actorOptions.HAS_POSITION]: [worldConfig.x_size, worldConfig.y_size * 3],
         [actorOptions.HAS_ORIGIN]: actorOptions.ORIGIN_TOP_LEFT,
         [actorOptions.ON_LAYER]: 'ui',

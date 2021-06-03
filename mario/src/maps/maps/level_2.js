@@ -4,22 +4,51 @@ import worldConfig from "../../worldConfig";
 const mapConfig = (engine) => {
     return [
         [
-            '                                    ',
-            '                                    ',
-            '                                    ',
-            '                                    ',
-            '                                    ',
-            '                                    ',
-            '                                    ',
-            '                                    ',
-            '    %   x*x%x                       ',
-            '                                    ',
-            '                             -+     ',
-            '                  ^  ^       ()     ',
-            '=========================   ========',
+            '£                                  £',
+            '£                                  £',
+            '£                                  £',
+            '£                                  £',
+            '£                                  £',
+            '£££7££7££££              s s       £',
+            '£                      s s s       £',
+            '£                    s s s s    -+ £',
+            '£             !    s s s s s    () £',
+            '£zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz£',
         ], {
             width: worldConfig.x_size,
             height: worldConfig.y_size,
+            '@': [
+                engine.sprite(assetNames.BLUE_BRICK),
+                engine.solid(),
+                engine.scale(0.5),
+            ],
+            '7': [
+                engine.sprite(assetNames.BLUE_SURPRISE),
+                engine.solid(),
+                engine.scale(0.5),
+                'coin-surprise',
+            ],
+            's': [
+                engine.sprite(assetNames.BLUE_STEEL),
+                engine.solid(),
+                engine.scale(0.5),
+            ],
+            'z': [
+                engine.sprite(assetNames.BLUE_BLOCK),
+                engine.solid(),
+                engine.scale(0.5),
+            ],
+            '!': [
+                engine.sprite(assetNames.BLUE_EVIL_SHROOM),
+                engine.body(),
+                engine.scale(0.5),
+                'dangerous'
+            ],
+            '£': [
+                engine.sprite(assetNames.BLUE_BLOCK),
+                engine.solid(),
+                engine.scale(0.5),
+            ],
             '=': [
                 engine.sprite(assetNames.BRICK),
                 engine.solid(),

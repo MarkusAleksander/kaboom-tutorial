@@ -42,10 +42,12 @@ InputMgr.initialise(engine);
 AssetMgr.loadAssets();
 
 // * create scene
-SceneMgr.createScene(SCENE_LIST.SCENE_MAIN);
+SceneMgr.createScene(SCENE_LIST.LEVEL_1);
+// * create scene
+SceneMgr.createScene(SCENE_LIST.LEVEL_2);
 
 // * create end scene
 SceneMgr.createScene(SCENE_LIST.SCENE_END);
 
 // start the game
-engine.start(SCENE_LIST.SCENE_MAIN);
+engine.start(SCENE_LIST.LEVEL_1);
